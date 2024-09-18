@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class SimpleMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
