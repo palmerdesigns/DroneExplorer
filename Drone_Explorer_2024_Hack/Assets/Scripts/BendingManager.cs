@@ -19,8 +19,8 @@ public class BendingManager : MonoBehaviour
     [SerializeField]
     private bool enablePlanet = default;
     [SerializeField]
-    [Range(0.005f, 0.1f)]
-    public float bendingAmount = 0.015f;
+    [Range(0f, 0.1f)]
+    public float bendingAmount = 0f;
     private float _prevAmount;
 
     private void Awake()

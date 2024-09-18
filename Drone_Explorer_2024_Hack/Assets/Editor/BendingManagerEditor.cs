@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 
 [InitializeOnLoad]
-public class BendingManagerEditor
+public class BendingManagerEditor : Editor
 {
     static BendingManagerEditor()
     {
@@ -22,11 +22,14 @@ public class BendingManagerEditor
         BendingManager bendingManager = Object.FindObjectOfType<BendingManager>();
         if (bendingManager != null)
         {
-            float newBendingAmount = GUILayout.HorizontalSlider(bendingManager.bendingAmount, 0.005f, 0.1f);
-            if (Mathf.Abs(newBendingAmount - bendingManager.bendingAmount) > Mathf.Epsilon)
+            if (bendingManager.BendingFeature)
             {
-                bendingManager.bendingAmount = newBendingAmount;
-                EditorUtility.SetDirty(bendingManager);
+                float newBendingAmount = GUILayout.HorizontalSlider(bendingManager.bendingAmount, 0f, 0.1f);
+                if (Mathf.Abs(newBendingAmount - bendingManager.bendingAmount) > Mathf.Epsilon)
+                {
+                    bendingManager.bendingAmount = newBendingAmount;
+                    EditorUtility.SetDirty(bendingManager);
+                }
             }
         }
         else
