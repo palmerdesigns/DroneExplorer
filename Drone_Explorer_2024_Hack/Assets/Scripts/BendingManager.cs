@@ -1,53 +1,30 @@
 
-//Original Source https://github.com/notslot/tutorial-world-bending
+//Original Source created by: https://github.com/notslot/tutorial-world-bending
 
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 [ExecuteAlways]
 public class BendingManager : MonoBehaviour
 {
-    #region Constants
-
-    private const string BENDING_FEATURE = "ENABLE_BENDING";
-
-    private const string PLANET_FEATURE = "ENABLE_BENDING_PLANET";
-
+    public bool BendingFeature;
+    private string BENDING_FEATURE = "ENABLE_BENDING";
+    private string PLANET_FEATURE = "ENABLE_BENDING_PLANET";
     private static readonly int BENDING_AMOUNT =
       Shader.PropertyToID("_BendingAmount");
 
-    #endregion
-
-
-    #region Inspector
 
     [SerializeField]
     private bool enablePlanet = default;
-
     [SerializeField]
     [Range(0.005f, 0.1f)]
-    private float bendingAmount = 0.015f;
-
-    #endregion
-
-
-    #region Fields
-
+    public float bendingAmount = 0.015f;
     private float _prevAmount;
-
-    #endregion
-
-
-    #region MonoBehaviour
 
     private void Awake()
     {
-        if (Application.isPlaying)
-            Shader.EnableKeyword(BENDING_FEATURE);
-        else
-            Shader.DisableKeyword(BENDING_FEATURE);
-
         if (enablePlanet)
             Shader.EnableKeyword(PLANET_FEATURE);
         else
@@ -67,6 +44,17 @@ public class BendingManager : MonoBehaviour
 
     private void Update()
     {
+        //Toggle Bending Feature
+        if (BendingFeature)
+        {
+            Shader.EnableKeyword(BENDING_FEATURE);
+        }
+        else
+        {
+            Shader.DisableKeyword(BENDING_FEATURE);
+        }
+
+
         if (Math.Abs(_prevAmount - bendingAmount) > Mathf.Epsilon)
             UpdateBendingAmount();
     }
@@ -76,11 +64,6 @@ public class BendingManager : MonoBehaviour
         RenderPipelineManager.beginCameraRendering -= OnBeginCameraRendering;
         RenderPipelineManager.endCameraRendering -= OnEndCameraRendering;
     }
-
-    #endregion
-
-
-    #region Methods
 
     private void UpdateBendingAmount()
     {
@@ -100,6 +83,4 @@ public class BendingManager : MonoBehaviour
     {
         cam.ResetCullingMatrix();
     }
-
-    #endregion
 }
