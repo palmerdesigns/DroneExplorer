@@ -11,7 +11,17 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        GameObject hit = collision.gameObject;
+        //TO DO: Adding this as a stop gap to destroy enemy on collision
+        if (hit.CompareTag("BadGuy"))
+        {
+            Destroy(hit);
+            Debug.Log("Hit the bad guy");
+        }
+
         Destroy(gameObject);
     }
+
+    
 }
 

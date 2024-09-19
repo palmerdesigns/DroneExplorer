@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4413570037953470090}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.137, y: -0.126, z: -0.997}
+  m_LocalPosition: {x: 0, y: 0, z: 2.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 7154691073202764256}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 0, z: -3.69}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 8666718387090871662}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.49, y: 11.97, z: -2.12}
+  m_LocalPosition: {x: 0, y: 10.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -127,6 +127,8 @@ GameObject:
   - component: {fileID: 8527051101398984764}
   - component: {fileID: 4438260066629585284}
   - component: {fileID: 1887506303013845088}
+  - component: {fileID: 2308118302592548163}
+  - component: {fileID: 8045102405083761865}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -181,9 +183,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4906646917789458179, guid: 1fafa8eb1b2ef804cb5171dd0dd9a02c,
     type: 3}
-  bulletSpawnPoint: {fileID: 0}
-  bulletSpeed: 20
-  fireRate: 0.5
+  bulletSpawnPoint: {fileID: 5302160661429413954}
+  bulletSpeed: 55
+  fireRate: 0.1
+--- !u!54 &2308118302592548163
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9022915407745880648}
+  serializedVersion: 4
+  m_Mass: 500
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
+--- !u!135 &8045102405083761865
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9022915407745880648}
+  m_Material: {fileID: 13400000, guid: fe985064db0249444932571091e12393, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5632709
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3109516963527490506
 PrefabInstance:
   m_ObjectHideFlags: 0
