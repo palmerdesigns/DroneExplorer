@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 8666718387090871662}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.79, z: 0}
+  m_LocalPosition: {x: -1.07, y: 5.14, z: 0.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 1887506303013845088}
   - component: {fileID: 2308118302592548163}
   - component: {fileID: 8045102405083761865}
+  - component: {fileID: 4887665428429287305}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -194,7 +195,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9022915407745880648}
   serializedVersion: 4
-  m_Mass: 500
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -208,7 +209,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -220,7 +221,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9022915407745880648}
-  m_Material: {fileID: 13400000, guid: fe985064db0249444932571091e12393, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -234,6 +235,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5632709
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4887665428429287305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9022915407745880648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfa5da694ece2247ae46fdb0016fdfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3109516963527490506
 PrefabInstance:
   m_ObjectHideFlags: 0
