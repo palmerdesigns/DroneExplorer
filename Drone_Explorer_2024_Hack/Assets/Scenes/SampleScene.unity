@@ -2448,7 +2448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BendingFeature: 1
   enablePlanet: 1
-  bendingAmount: 0.072455905
+  bendingAmount: 0
 --- !u!4 &631515444
 Transform:
   m_ObjectHideFlags: 0
@@ -2861,6 +2861,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drone
+      objectReference: {fileID: 0}
+    - target: {fileID: 9022915407745880648, guid: 33c6b534ba2966c4da8ec402f955ed29,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7722,20 +7727,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1361014198708586484, guid: d5276d69564d219429fef50f3dd03669,
+    - target: {fileID: 2425397936506781102, guid: d5276d69564d219429fef50f3dd03669,
         type: 3}
-      propertyPath: m_TagString
-      value: shockwave
+      propertyPath: m_Radius
+      value: 3.43
       objectReference: {fileID: 0}
-    - target: {fileID: 2933682274702852095, guid: d5276d69564d219429fef50f3dd03669,
+    - target: {fileID: 6951102883540825642, guid: d5276d69564d219429fef50f3dd03669,
         type: 3}
-      propertyPath: m_TagString
-      value: shockwave
-      objectReference: {fileID: 0}
-    - target: {fileID: 8998896899188414509, guid: d5276d69564d219429fef50f3dd03669,
-        type: 3}
-      propertyPath: m_TagString
-      value: shockwave
+      propertyPath: triggerRadius
+      value: 0.61
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
