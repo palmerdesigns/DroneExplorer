@@ -1,7 +1,14 @@
 using UnityEngine;
+using static Bullet;
 
 public class Bullet : MonoBehaviour
 {
+    #region Events
+
+    public delegate void BulletDestroyEnemy(int points);
+    public static event BulletDestroyEnemy OnBulletDestroyEnemy;
+
+    #endregion
 
     void Update()
     {
@@ -16,12 +23,11 @@ public class Bullet : MonoBehaviour
         if (hit.CompareTag("BadGuy"))
         {
             Destroy(hit);
+            OnBulletDestroyEnemy?.Invoke(5);
             Debug.Log("Hit the bad guy");
         }
 
         Destroy(gameObject);
     }
-
-    
 }
 
