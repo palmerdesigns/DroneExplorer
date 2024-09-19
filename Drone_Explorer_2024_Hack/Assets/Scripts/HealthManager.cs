@@ -29,6 +29,7 @@ public class HealthManager : MonoBehaviour
                 break;
             case "health":
                 Debug.Log("player hit health");
+                Destroy(other.gameObject);
                 Heal(10);
                 break;
         }
