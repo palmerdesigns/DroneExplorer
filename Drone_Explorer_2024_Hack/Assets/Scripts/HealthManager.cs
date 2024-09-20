@@ -9,13 +9,9 @@ public class HealthManager : MonoBehaviour
 {
     public int maxHealth = 100;
     public int lives = 3;
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI livesText;
 
     private void Update()
     {
-        healthText.text = "Health: " + maxHealth;
-        livesText.text = "Lives: " + lives;
         CheckHealthLimit(100);
     }
 
@@ -25,7 +21,7 @@ public class HealthManager : MonoBehaviour
         {
             case "shockwave":
                 Debug.Log("player hit shockwave");
-                TakeDamage(10);
+                TakeDamage(5);
                 break;
             case "health":
                 Debug.Log("player hit health");

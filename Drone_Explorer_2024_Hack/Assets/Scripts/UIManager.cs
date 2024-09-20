@@ -4,16 +4,20 @@ using UnityEngine;
 using TMPro;
 
 [ExecuteInEditMode]
-public class GameManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     public int score;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI livesText;
+    public HealthManager healthManager;
 
     #region Subscriptions
 
     private void OnEnable()
     {
         Bullet.OnBulletDestroyEnemy += UpdateScore;
+        
     }
 
     private void OnDisable()
@@ -26,12 +30,20 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         scoreText.text = "Score pts: " + score;
+        healthText.text = "Health: " + healthManager.maxHealth;
+        livesText.text = "Lives: " + healthManager.lives;
+        
         Win(50);
     }
 
     public void UpdateScore(int points)
     {
         score += points;
+    }
+
+    public void UpdateHealth(int health)
+    {
+        healthText.text = "Health: " + health;
     }
 
     public void Win(int maxScore)
