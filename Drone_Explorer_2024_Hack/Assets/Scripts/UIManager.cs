@@ -41,10 +41,8 @@ public class UIManager : MonoBehaviour
         score += points;
     }
 
-    public void UpdateHealth(int health)
-    {
-        healthText.text = "Health: " + health;
-    }
+
+    
 
     public void Win(int maxScore)
     {

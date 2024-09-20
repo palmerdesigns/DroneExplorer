@@ -10,6 +10,13 @@ public class Bullet : MonoBehaviour
 
     #endregion
 
+     HealthManager healthManager;
+
+    void Start()
+    {
+        healthManager = FindObjectOfType<HealthManager>();
+    }
+
     void Update()
     {
         //Assures the bullet is destroyed after 3 seconds
@@ -19,15 +26,19 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GameObject hit = collision.gameObject;
-        //TO DO: Adding this as a stop gap to destroy enemy on collision
+
         if (hit.CompareTag("BadGuy"))
         {
             Destroy(hit);
             OnBulletDestroyEnemy?.Invoke(5);
             Debug.Log("Hit the bad guy");
         }
-
+       
+        if (hit.CompareTag("Player"))
+        {
+            healthManager.TakeDamage(5);
+            Debug.Log("Hit the player");
+        }
         Destroy(gameObject);
     }
 }
-

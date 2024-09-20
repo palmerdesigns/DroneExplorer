@@ -6,6 +6,7 @@ public class SimpleMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float rotationSpeed = 700f;
     public float panningSpeed = 100f;
+    Projectiles projectiles;
 
     private Rigidbody rb;
 
@@ -17,6 +18,9 @@ public class SimpleMovement : MonoBehaviour
 
         // Get the Rigidbody component
         rb = GetComponent<Rigidbody>();
+
+        // Get the Projectiles component
+        projectiles = GetComponent<Projectiles>();
     }
 
     void Update()
@@ -33,6 +37,13 @@ public class SimpleMovement : MonoBehaviour
             float moveZ = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
             Vector3 movement = transform.right * moveX + transform.forward * moveZ;
             rb.MovePosition(transform.position + movement);
+
+            // Handle Shooting
+           if (Input.GetMouseButtonDown(0) && Time.time > projectiles.nextFireTime)
+            {
+                projectiles.nextFireTime = Time.time + projectiles.fireRate;
+                projectiles.Shoot();
+            }
         }
     }
 }

@@ -7,18 +7,9 @@ public class Projectiles : MonoBehaviour
     public float bulletSpeed = 20f;
     public float fireRate = 0.10f; // Delay between shots
 
-    private float nextFireTime = 0f;
+    public float nextFireTime = 0f;
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && Time.time > nextFireTime)
-        {
-            nextFireTime = Time.time + fireRate;
-            Shoot();
-        }
-    }
-
-    void Shoot()
+    public void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
