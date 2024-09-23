@@ -1,5 +1,4 @@
 # Drone Explorer Prototype
-Microsoft Global Hackathon 2024 Project 
 
 ![Game Play](https://github.com/palmerdesigns/DroneExplorer/blob/main/Readme_Images/DroneExplorer.gif)
 
