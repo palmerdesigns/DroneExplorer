@@ -8,3 +8,5 @@ Small exploration game designed to experiment with shader effects
 - Kenny Assets: https://kenney.nl/assets
 
 - Notslot Bend Shader: https://github.com/notslot/tutorial-world-bending
+
+- Fontspace: https://www.fontspace.com/fatal-distraction-font-f102858
