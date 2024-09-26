@@ -1612,7 +1612,6 @@ MonoBehaviour:
   healthText: {fileID: 13628425}
   livesText: {fileID: 398818296}
   healthManager: {fileID: 1018690615}
-  isPaused: 0
 --- !u!4 &360273330
 Transform:
   m_ObjectHideFlags: 0
@@ -6894,6 +6893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cb5fa3326fafe4db08de3def9880d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
+  _menuState: 0
 --- !u!1001 &1698710686
 PrefabInstance:
   m_ObjectHideFlags: 0

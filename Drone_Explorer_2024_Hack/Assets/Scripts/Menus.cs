@@ -18,6 +18,7 @@ public class Menus : MonoBehaviour
         MainMenu,
         PauseMenu,
         OptionsMenu,
+        None
     }
 
     private List<Button> _menuButtons = new List<Button>();
@@ -49,7 +50,7 @@ public class Menus : MonoBehaviour
 
     private void Update()
     {
-        //CheckMenuState();
+        CheckMenuState();
     }
 
     #region Methods
@@ -57,8 +58,7 @@ public class Menus : MonoBehaviour
     private void OnPlayGameClicked(ClickEvent evt)
     {
         TogglePause();
-        //_document.rootVisualElement.style.display = DisplayStyle.None;
-        Debug.Log("Play Game Clicked");
+        Debug.Log("Play Game Button Clicked");
     }
 
     //Generic Method for all buttons
@@ -79,16 +79,19 @@ public class Menus : MonoBehaviour
 
     public void CheckMenuState()
     {
+        _menuState = isPaused ? MenuState.PauseMenu : MenuState.None;
+
         switch (_menuState)
         {
             case MenuState.MainMenu:
-               
                 break;
             case MenuState.PauseMenu:
-               
+                _document.rootVisualElement.style.display = DisplayStyle.Flex;
                 break;
             case MenuState.OptionsMenu:
-                
+                break;
+            case MenuState.None:
+                _document.rootVisualElement.style.display = DisplayStyle.None;
                 break;
         }
     }
