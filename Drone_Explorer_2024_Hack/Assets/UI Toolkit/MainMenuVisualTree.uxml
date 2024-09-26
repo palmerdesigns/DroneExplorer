@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=66f5238ef97a73e4b8a65fcb522281cd&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.98);">
+        <ui:Label tabindex="-1" text="Drone Exploration" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="header" style="justify-content: flex-start; align-items: auto; -unity-text-align: upper-center; font-size: 100px; -unity-font-style: bold; color: rgb(255, 255, 255); top: 142px;" />
+    </ui:VisualElement>
+    <ui:GroupBox style="align-items: center; justify-content: center; position: absolute; right: 1995px; top: 110px;">
+        <ui:Button text="START" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartGameButton" class="button buttontext" style="background-image: url(&quot;project://database/Assets/Kenny_Assets/UI/PNG/Green/Default/button_rectangle_depth_gradient.png?fileID=2800000&amp;guid=9238c850031330f4890d698518cc543e&amp;type=3#button_rectangle_depth_gradient&quot;); white-space: normal; -unity-text-align: middle-center; top: 370px; left: 717px;" />
+        <ui:Button text="SETTINGS" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SettingsButton" class="button buttontext" style="background-image: url(&quot;project://database/Assets/Kenny_Assets/UI/PNG/Green/Default/button_rectangle_depth_gradient.png?fileID=2800000&amp;guid=9238c850031330f4890d698518cc543e&amp;type=3#button_rectangle_depth_gradient&quot;); top: 370px; left: 1093px;" />
+    </ui:GroupBox>
+</ui:UXML>

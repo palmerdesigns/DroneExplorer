@@ -1,0 +1,41 @@
+.header {
+    font-size: 100px;
+    -unity-font-style: bold;
+    -unity-font: url("project://database/Assets/Font/FatalDistraction-Wy3xY.ttf?fileID=12800000&guid=b9de65c344526e7439d74084e1e7f53c&type=3#FatalDistraction-Wy3xY");
+    -unity-font-definition: initial;
+}
+
+.buttontext {
+    font-size: 25px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
+
+.button {
+    font-size: 25px;
+    width: 250px;
+    height: 65px;
+    -unity-text-align: middle-center;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-top: 0;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    position: absolute;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    transition-duration: 0.25s;
+}
+
+.button:hover {
+    scale: 1.1 1.1;
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(226, 0, 255);
+}

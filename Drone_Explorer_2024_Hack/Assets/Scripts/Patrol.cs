@@ -64,12 +64,12 @@ public class Patrol : MonoBehaviour
 
     public void Patroling()
     {
-        Debug.Log("Patroling");
+        //Debug.Log("Patroling");
     }
 
     public void Chase()
     {
-        Debug.Log("Chasing");
+       //s Debug.Log("Chasing");
 
         // Rotate towards player
         Vector3 direction = (player.position - transform.position).normalized;

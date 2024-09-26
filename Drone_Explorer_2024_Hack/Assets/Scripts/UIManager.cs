@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI healthText;
     public TextMeshProUGUI livesText;
     public HealthManager healthManager;
+    
+
+  
 
     #region Subscriptions
 
@@ -40,8 +43,6 @@ public class UIManager : MonoBehaviour
     {
         score += points;
     }
-
-
     
 
     public void Win(int maxScore)

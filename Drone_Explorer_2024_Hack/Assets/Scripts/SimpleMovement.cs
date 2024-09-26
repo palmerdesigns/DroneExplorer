@@ -7,6 +7,7 @@ public class SimpleMovement : MonoBehaviour
     public float rotationSpeed = 700f;
     public float panningSpeed = 100f;
     Projectiles projectiles;
+    Menus menu;
 
     private Rigidbody rb;
 
@@ -21,11 +22,19 @@ public class SimpleMovement : MonoBehaviour
 
         // Get the Projectiles component
         projectiles = GetComponent<Projectiles>();
+        menu = FindObjectOfType<Menus>();
     }
 
     void Update()
     {
-        if (Application.isPlaying)
+        // Handle pause toggle
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space key was pressed.");
+            menu.TogglePause();
+        }
+
+        if (Application.isPlaying && !menu.isPaused)
         {
             // Handle rotation
             float mouseX = Input.GetAxis("Mouse X") * panningSpeed * Time.deltaTime;
@@ -39,11 +48,25 @@ public class SimpleMovement : MonoBehaviour
             rb.MovePosition(transform.position + movement);
 
             // Handle Shooting
-           if (Input.GetMouseButtonDown(0) && Time.time > projectiles.nextFireTime)
+            if (Input.GetMouseButtonDown(0) && Time.time > projectiles.nextFireTime)
             {
                 projectiles.nextFireTime = Time.time + projectiles.fireRate;
                 projectiles.Shoot();
             }
+        }
+    }
+
+    public void UpdateCursorState()
+    {
+        if (menu.isPaused)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }
