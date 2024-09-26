@@ -5,9 +5,19 @@ using UnityEngine.UIElements;
 
 public class Menus : MonoBehaviour
 {
-    private AudioSource _audioSource;
+    #region UI Elements Fields
     private UIDocument _document;
-    private Button _button;
+    private Button _playButton;
+    private Button _settingsButton;
+    private Button _settingsBackButton;
+    private Button _settingsCloseButton;
+    private VisualElement _pauseMenu;
+
+    #endregion
+
+    #region Fields
+
+    private AudioSource _audioSource;
     private SimpleMovement _simpleMovement;
     public bool isPaused = false;
     [SerializeField]
@@ -17,19 +27,39 @@ public class Menus : MonoBehaviour
     {
         MainMenu,
         PauseMenu,
-        OptionsMenu,
+        SettingsMenu,
         None
     }
 
     private List<Button> _menuButtons = new List<Button>();
 
+    #endregion
+
     private void Awake()
     {
+        //Get Components
+
         _audioSource = GetComponent<AudioSource>();
-        _document = GetComponent<UIDocument>();
-        _button = _document.rootVisualElement.Q<Button>("StartGameButton") as Button;
-        _button.RegisterCallback<ClickEvent>(OnPlayGameClicked);
         _simpleMovement = FindObjectOfType<SimpleMovement>();
+        _document = GetComponent<UIDocument>();
+
+        //Events
+
+        _playButton = _document.rootVisualElement.Q<Button>("StartGameButton") as Button;
+        _playButton.RegisterCallback<ClickEvent>(OnPlayGameClicked);
+
+        _pauseMenu = _document.rootVisualElement.Q<VisualElement>("PauseMenu");
+
+        _settingsButton = _document.rootVisualElement.Q<Button>("SettingsButton") as Button;
+        _settingsButton.RegisterCallback<ClickEvent>(OnSettingsClicked);
+
+        _settingsBackButton = _document.rootVisualElement.Q<Button>("SettingsBackButton") as Button;
+        _settingsBackButton.RegisterCallback<ClickEvent>(OnSettingsBack);
+
+        _settingsCloseButton = _document.rootVisualElement.Q<Button>("SettingsCloseButton") as Button;
+        _settingsCloseButton.RegisterCallback<ClickEvent>(OnSettingsCloses);
+
+        // Play Sound for each button
 
         _menuButtons = _document.rootVisualElement.Query<Button>().ToList();
         for (int i = 0; i < _menuButtons.Count; i++)
@@ -40,7 +70,10 @@ public class Menus : MonoBehaviour
 
     private void OnDisable()
     {
-        _button.UnregisterCallback<ClickEvent>(OnPlayGameClicked);
+        // Unregister Events
+
+        _playButton.UnregisterCallback<ClickEvent>(OnPlayGameClicked);
+        _pauseMenu.UnregisterCallback<ClickEvent>(OnSettingsClicked);
 
         for (int i = 0; i < _menuButtons.Count; i++)
         {
@@ -53,12 +86,33 @@ public class Menus : MonoBehaviour
         CheckMenuState();
     }
 
-    #region Methods
+    #region Buttons Click Events
 
     private void OnPlayGameClicked(ClickEvent evt)
     {
         TogglePause();
         Debug.Log("Play Game Button Clicked");
+    }
+
+    private void OnSettingsClicked(ClickEvent evt)
+    {
+        //Hide Pause Menuss
+        _pauseMenu.style.display = DisplayStyle.None;
+        _menuState = MenuState.SettingsMenu;
+
+    }
+
+    private void OnSettingsBack(ClickEvent evt)
+    {
+        //Show Pause Menu
+        _pauseMenu.style.display = DisplayStyle.Flex;
+        _menuState = MenuState.PauseMenu;
+    }
+
+    private void OnSettingsCloses(ClickEvent evt)
+    {
+        TogglePause();
+        _menuState = MenuState.None;
     }
 
     //Generic Method for all buttons
@@ -68,6 +122,10 @@ public class Menus : MonoBehaviour
         _audioSource.Play();
     }
 
+    #endregion
+
+    #region Managing States
+
     public void TogglePause()
     {
         isPaused = !isPaused;
@@ -75,6 +133,10 @@ public class Menus : MonoBehaviour
         {
             _simpleMovement.UpdateCursorState();
         }
+
+        //change menu state based on pause state
+        _menuState = isPaused ? MenuState.PauseMenu : MenuState.None;
+
     }
 
     public void CheckMenuState()
@@ -88,7 +150,7 @@ public class Menus : MonoBehaviour
             case MenuState.PauseMenu:
                 _document.rootVisualElement.style.display = DisplayStyle.Flex;
                 break;
-            case MenuState.OptionsMenu:
+            case MenuState.SettingsMenu:
                 break;
             case MenuState.None:
                 _document.rootVisualElement.style.display = DisplayStyle.None;
@@ -97,4 +159,5 @@ public class Menus : MonoBehaviour
     }
 
     #endregion
+
 }
