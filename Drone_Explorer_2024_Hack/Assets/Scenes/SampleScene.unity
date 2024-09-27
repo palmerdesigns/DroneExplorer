@@ -1634,12 +1634,12 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360273328}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 039356d1c0de0f94680b2c8ee77000e2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.512
+  m_Volume: 0.605
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2337,7 +2337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &451046937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2936,7 +2936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BendingFeature: 1
   enablePlanet: 1
-  bendingAmount: 0.049297936
+  bendingAmount: 0.020175181
 --- !u!4 &631515444
 Transform:
   m_ObjectHideFlags: 0
@@ -3350,7 +3350,7 @@ PrefabInstance:
     - target: {fileID: 8527051101398984764, guid: 33c6b534ba2966c4da8ec402f955ed29,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.6
+      value: 22.31
       objectReference: {fileID: 0}
     - target: {fileID: 8527051101398984764, guid: 33c6b534ba2966c4da8ec402f955ed29,
         type: 3}
@@ -3360,7 +3360,7 @@ PrefabInstance:
     - target: {fileID: 8527051101398984764, guid: 33c6b534ba2966c4da8ec402f955ed29,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.69
+      value: 2.14
       objectReference: {fileID: 0}
     - target: {fileID: 8527051101398984764, guid: 33c6b534ba2966c4da8ec402f955ed29,
         type: 3}
@@ -5740,6 +5740,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleBot
       objectReference: {fileID: 0}
+    - target: {fileID: 5661965971333314687, guid: e159eb55bb566004992ec7e2535886cb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6748,7 +6753,7 @@ GameObject:
   - component: {fileID: 1696245289}
   m_Layer: 5
   m_Name: MainMenu
-  m_TagString: Untagged
+  m_TagString: SFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6893,6 +6898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cb5fa3326fafe4db08de3def9880d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameManagerAudio: {fileID: 360273331}
   isPaused: 0
   _menuState: 0
 --- !u!1001 &1698710686
@@ -8556,7 +8562,7 @@ Transform:
   m_GameObject: {fileID: 1958153126}
   serializedVersion: 2
   m_LocalRotation: {x: 0.66010255, y: -0.018559027, z: 0.041830376, w: 0.7497803}
-  m_LocalPosition: {x: 30.390001, y: 12.279999, z: -0.28999996}
+  m_LocalPosition: {x: 22.1, y: 12.279999, z: 1.1599998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8949,7 +8955,7 @@ Transform:
   m_GameObject: {fileID: 2042028994}
   serializedVersion: 2
   m_LocalRotation: {x: 0.65559506, y: 0.07921419, z: -0.06945369, w: 0.7477276}
-  m_LocalPosition: {x: 30.390001, y: 12.279999, z: -0.28999996}
+  m_LocalPosition: {x: 22.1, y: 12.279999, z: 1.1599998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

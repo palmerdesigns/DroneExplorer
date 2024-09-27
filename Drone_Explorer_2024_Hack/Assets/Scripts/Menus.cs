@@ -11,6 +11,14 @@ public class Menus : MonoBehaviour
     private Button _settingsButton;
     private Button _settingsBackButton;
     private Button _settingsCloseButton;
+
+    // Audio Buttons
+
+    private Button _musicAdd;
+    private Button _musicSubtract;
+    private Button _sfxAdd;
+    private Button _sfxSubtract;
+
     private VisualElement _pauseMenu;
 
     #endregion
@@ -18,6 +26,7 @@ public class Menus : MonoBehaviour
     #region Fields
 
     private AudioSource _audioSource;
+    public AudioSource _gameManagerAudio;
     private SimpleMovement _simpleMovement;
     public bool isPaused = false;
     [SerializeField]
@@ -59,6 +68,10 @@ public class Menus : MonoBehaviour
         _settingsCloseButton = _document.rootVisualElement.Q<Button>("SettingsCloseButton") as Button;
         _settingsCloseButton.RegisterCallback<ClickEvent>(OnSettingsCloses);
 
+        // Audio Buttons
+
+        
+
         // Play Sound for each button
 
         _menuButtons = _document.rootVisualElement.Query<Button>().ToList();
@@ -74,6 +87,7 @@ public class Menus : MonoBehaviour
 
         _playButton.UnregisterCallback<ClickEvent>(OnPlayGameClicked);
         _pauseMenu.UnregisterCallback<ClickEvent>(OnSettingsClicked);
+       
 
         for (int i = 0; i < _menuButtons.Count; i++)
         {
@@ -107,6 +121,7 @@ public class Menus : MonoBehaviour
         //Show Pause Menu
         _pauseMenu.style.display = DisplayStyle.Flex;
         _menuState = MenuState.PauseMenu;
+        Debug.Log("Settings Back Button Clicked");
     }
 
     private void OnSettingsCloses(ClickEvent evt)
@@ -120,6 +135,18 @@ public class Menus : MonoBehaviour
     {
         Debug.Log("All Button Click, Play Sound");
         _audioSource.Play();
+    }
+
+    private void OnMusicLevelIncreased(ChangeEvent<float> evt)
+    {
+       /* Debug.Log($"Slider Value Changed: {evt.newValue}");
+        _gameManagerAudio.volume = evt.newValue;*/
+    }
+
+    private void OnMusicLevelDecreased(ChangeEvent<float> evt)
+    {
+       /* Debug.Log($"Slider Value Changed: {evt.newValue}");
+        _gameManagerAudio.volume = evt.newValue;*/
     }
 
     #endregion
