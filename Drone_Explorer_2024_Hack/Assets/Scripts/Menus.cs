@@ -11,6 +11,8 @@ public class Menus : MonoBehaviour
     private Button _settingsButton;
     private Button _settingsBackButton;
     private Button _settingsCloseButton;
+    private Label _musicLevel;
+    private Label _sfxLevel;
 
     // Audio Buttons
 
@@ -20,6 +22,7 @@ public class Menus : MonoBehaviour
     private Button _sfxSubtract;
 
     private VisualElement _pauseMenu;
+    private VisualElement _settingsMenu;
 
     #endregion
 
@@ -51,6 +54,8 @@ public class Menus : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _simpleMovement = FindObjectOfType<SimpleMovement>();
         _document = GetComponent<UIDocument>();
+        _musicLevel = _document.rootVisualElement.Q<Label>("CurrentMusicVolume") as Label;
+        _sfxLevel = _document.rootVisualElement.Q<Label>("CurrentSFXVolume") as Label;
 
         //Events
 
@@ -58,6 +63,7 @@ public class Menus : MonoBehaviour
         _playButton.RegisterCallback<ClickEvent>(OnPlayGameClicked);
 
         _pauseMenu = _document.rootVisualElement.Q<VisualElement>("PauseMenu");
+        _settingsMenu = _document.rootVisualElement.Q<VisualElement>("SettingsMenu");
 
         _settingsButton = _document.rootVisualElement.Q<Button>("SettingsButton") as Button;
         _settingsButton.RegisterCallback<ClickEvent>(OnSettingsClicked);
@@ -68,9 +74,27 @@ public class Menus : MonoBehaviour
         _settingsCloseButton = _document.rootVisualElement.Q<Button>("SettingsCloseButton") as Button;
         _settingsCloseButton.RegisterCallback<ClickEvent>(OnSettingsCloses);
 
-        // Audio Buttons
+        /// <summary>
+        /// Audio Buttons
+        /// </summary>
+        /// 
 
-        
+        //Music Buttons
+
+        _musicAdd = _document.rootVisualElement.Q<Button>("MusicLevelAdd") as Button;
+        _musicAdd.RegisterCallback<ClickEvent>(OnMusicLevelIncreased);
+
+        _musicSubtract = _document.rootVisualElement.Q<Button>("MusicLevelSubtract") as Button;
+        _musicSubtract.RegisterCallback<ClickEvent>(OnMusicLevelDecreased);
+
+        //SFX Buttons
+
+        _sfxAdd = _document.rootVisualElement.Q<Button>("SFXLevelAdd") as Button;
+        _sfxAdd.RegisterCallback<ClickEvent>(OnSFXLevelIncreased);
+
+        _sfxSubtract = _document.rootVisualElement.Q<Button>("SFXLevelSubtract") as Button;
+        _sfxSubtract.RegisterCallback<ClickEvent>(OnSFXLevelDecreased);
+
 
         // Play Sound for each button
 
@@ -87,7 +111,7 @@ public class Menus : MonoBehaviour
 
         _playButton.UnregisterCallback<ClickEvent>(OnPlayGameClicked);
         _pauseMenu.UnregisterCallback<ClickEvent>(OnSettingsClicked);
-       
+        _settingsMenu.UnregisterCallback<ClickEvent>(OnSettingsBack);
 
         for (int i = 0; i < _menuButtons.Count; i++)
         {
@@ -110,18 +134,12 @@ public class Menus : MonoBehaviour
 
     private void OnSettingsClicked(ClickEvent evt)
     {
-        //Hide Pause Menuss
-        _pauseMenu.style.display = DisplayStyle.None;
         _menuState = MenuState.SettingsMenu;
-
     }
 
     private void OnSettingsBack(ClickEvent evt)
     {
-        //Show Pause Menu
-        _pauseMenu.style.display = DisplayStyle.Flex;
         _menuState = MenuState.PauseMenu;
-        Debug.Log("Settings Back Button Clicked");
     }
 
     private void OnSettingsCloses(ClickEvent evt)
@@ -137,16 +155,64 @@ public class Menus : MonoBehaviour
         _audioSource.Play();
     }
 
-    private void OnMusicLevelIncreased(ChangeEvent<float> evt)
+    private void OnMusicLevelIncreased(ClickEvent evt)
     {
-       /* Debug.Log($"Slider Value Changed: {evt.newValue}");
-        _gameManagerAudio.volume = evt.newValue;*/
+        Debug.Log("Increased");
+        _gameManagerAudio.volume = Mathf.Clamp(_gameManagerAudio.volume + 0.1f, 0, 1);
+        UpdateMusicLevelLabel();
     }
 
-    private void OnMusicLevelDecreased(ChangeEvent<float> evt)
+    private void OnMusicLevelDecreased(ClickEvent evt)
     {
-       /* Debug.Log($"Slider Value Changed: {evt.newValue}");
-        _gameManagerAudio.volume = evt.newValue;*/
+        Debug.Log("Decreased");
+        _gameManagerAudio.volume = Mathf.Clamp(_gameManagerAudio.volume - 0.1f, 0, 1);
+        UpdateMusicLevelLabel();
+    }
+
+    private void OnSFXLevelIncreased(ClickEvent evt)
+    {
+        Debug.Log("Increased");
+        UpdateSFXVolume(0.1f);
+        UpdateSFXLevelLabel();
+    }
+
+    private void OnSFXLevelDecreased(ClickEvent evt)
+    {
+        Debug.Log("Decreased");
+        UpdateSFXVolume(-0.1f);
+        UpdateSFXLevelLabel();
+    }
+
+    /// <summary>
+    /// Updates the music level label to reflect the current volume as a whole number.
+    /// </summary>
+    public void UpdateMusicLevelLabel()
+    {
+        int wholeNumberVolume = Mathf.RoundToInt(_gameManagerAudio.volume * 10);
+        _musicLevel.text = wholeNumberVolume.ToString();
+    }
+
+    public void UpdateSFXLevelLabel()
+    {
+        int wholeNumberVolume = Mathf.RoundToInt(_audioSource.volume * 10);
+        _sfxLevel.text = wholeNumberVolume.ToString();
+    }
+
+    /// <summary>
+    /// Updates the volume of all AudioSources with the tag "SFX".
+    /// </summary>
+    /// <param name="delta">The amount to change the volume by.</param>
+    private void UpdateSFXVolume(float delta)
+    {
+        GameObject[] sfxObjects = GameObject.FindGameObjectsWithTag("SFX");
+        foreach (GameObject sfxObject in sfxObjects)
+        {
+            AudioSource audioSource = sfxObject.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.volume = Mathf.Clamp(audioSource.volume + delta, 0, 1);
+            }
+        }
     }
 
     #endregion
@@ -161,23 +227,23 @@ public class Menus : MonoBehaviour
             _simpleMovement.UpdateCursorState();
         }
 
-        //change menu state based on pause state
         _menuState = isPaused ? MenuState.PauseMenu : MenuState.None;
-
     }
 
     public void CheckMenuState()
     {
-        _menuState = isPaused ? MenuState.PauseMenu : MenuState.None;
-
         switch (_menuState)
         {
             case MenuState.MainMenu:
                 break;
             case MenuState.PauseMenu:
                 _document.rootVisualElement.style.display = DisplayStyle.Flex;
+                _pauseMenu.style.display = DisplayStyle.Flex;
+                _settingsMenu.style.display = DisplayStyle.None;
                 break;
             case MenuState.SettingsMenu:
+                _settingsMenu.style.display = DisplayStyle.Flex;
+                _pauseMenu.style.display = DisplayStyle.None;
                 break;
             case MenuState.None:
                 _document.rootVisualElement.style.display = DisplayStyle.None;
