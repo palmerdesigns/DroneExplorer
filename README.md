@@ -1,5 +1,7 @@
-# Drone Explorer Prototype
-Small exploration game designed to experiment with shader effects
+# Drone Explorer Micro Game
+Small exploration game
+
+![Game Play](https://github.com/palmerdesigns/DroneExplorer/blob/main/Readme_Images/Drone_Hero_Image.png)
 
 ![Game Play](https://github.com/palmerdesigns/DroneExplorer/blob/main/Readme_Images/DroneExplorer.gif)
 
