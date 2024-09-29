@@ -11,6 +11,9 @@ public class Menus : MonoBehaviour
     private Button _settingsButton;
     private Button _settingsBackButton;
     private Button _settingsCloseButton;
+    private Button _controlsButton;
+    private Button _controlsBackButton;
+    private Button _controlsCloseButton;
     private Label _musicLevel;
     private Label _sfxLevel;
 
@@ -23,6 +26,8 @@ public class Menus : MonoBehaviour
 
     private VisualElement _pauseMenu;
     private VisualElement _settingsMenu;
+    private VisualElement _mainMenu; // TODO: Add MainMenu
+    private VisualElement _controlsMenu;
 
     #endregion
 
@@ -40,6 +45,7 @@ public class Menus : MonoBehaviour
         MainMenu,
         PauseMenu,
         SettingsMenu,
+        Controls,
         None
     }
 
@@ -64,6 +70,7 @@ public class Menus : MonoBehaviour
 
         _pauseMenu = _document.rootVisualElement.Q<VisualElement>("PauseMenu");
         _settingsMenu = _document.rootVisualElement.Q<VisualElement>("SettingsMenu");
+        _controlsMenu = _document.rootVisualElement.Q<VisualElement>("ControlsMenu");
 
         _settingsButton = _document.rootVisualElement.Q<Button>("SettingsButton") as Button;
         _settingsButton.RegisterCallback<ClickEvent>(OnSettingsClicked);
@@ -73,6 +80,15 @@ public class Menus : MonoBehaviour
 
         _settingsCloseButton = _document.rootVisualElement.Q<Button>("SettingsCloseButton") as Button;
         _settingsCloseButton.RegisterCallback<ClickEvent>(OnSettingsCloses);
+
+        _controlsButton = _document.rootVisualElement.Q<Button>("ControlsButton") as Button;
+        _controlsButton.RegisterCallback<ClickEvent>(OnControlsClicked);
+
+        _controlsBackButton = _document.rootVisualElement.Q<Button>("ControlsBackButton") as Button;
+        _controlsBackButton.RegisterCallback<ClickEvent>(OnSettingsBack);
+
+        _controlsCloseButton = _document.rootVisualElement.Q<Button>("ControlsCloseButton") as Button;
+        _controlsCloseButton.RegisterCallback<ClickEvent>(OnSettingsCloses);
 
         /// <summary>
         /// Audio Buttons
@@ -112,6 +128,10 @@ public class Menus : MonoBehaviour
         _playButton.UnregisterCallback<ClickEvent>(OnPlayGameClicked);
         _pauseMenu.UnregisterCallback<ClickEvent>(OnSettingsClicked);
         _settingsMenu.UnregisterCallback<ClickEvent>(OnSettingsBack);
+        _settingsMenu.UnregisterCallback<ClickEvent>(OnSettingsCloses);
+        _controlsMenu.UnregisterCallback<ClickEvent>(OnControlsClicked);
+        _controlsMenu.UnregisterCallback<ClickEvent>(OnControlsBack);
+        _controlsMenu.UnregisterCallback<ClickEvent>(OnControlsCloses);
 
         for (int i = 0; i < _menuButtons.Count; i++)
         {
@@ -153,6 +173,22 @@ public class Menus : MonoBehaviour
     {
         Debug.Log("All Button Click, Play Sound");
         _audioSource.Play();
+    }
+
+    private void OnControlsClicked(ClickEvent evt)
+    {
+        _menuState = MenuState.Controls;
+    }
+
+    private void OnControlsBack(ClickEvent evt)
+    {
+        _menuState = MenuState.PauseMenu;
+    }
+
+    private void OnControlsCloses(ClickEvent evt)
+    {
+        TogglePause();
+        _menuState = MenuState.None;
     }
 
     private void OnMusicLevelIncreased(ClickEvent evt)
@@ -240,10 +276,17 @@ public class Menus : MonoBehaviour
                 _document.rootVisualElement.style.display = DisplayStyle.Flex;
                 _pauseMenu.style.display = DisplayStyle.Flex;
                 _settingsMenu.style.display = DisplayStyle.None;
+                _controlsMenu.style.display = DisplayStyle.None;
                 break;
             case MenuState.SettingsMenu:
                 _settingsMenu.style.display = DisplayStyle.Flex;
                 _pauseMenu.style.display = DisplayStyle.None;
+                _controlsMenu.style.display = DisplayStyle.None;
+                break;
+            case MenuState.Controls:
+                _controlsMenu.style.display = DisplayStyle.Flex;
+                _pauseMenu.style.display = DisplayStyle.None;
+                _settingsMenu.style.display = DisplayStyle.None;
                 break;
             case MenuState.None:
                 _document.rootVisualElement.style.display = DisplayStyle.None;
