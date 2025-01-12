@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.microsoft.mrtk.graphicstools.unity": "https://github.com/microsoft/MixedReality-GraphicsTools-Unity.git?path=/com.microsoft.mrtk.graphicstools.unity#v0.8.0",
     "com.unity.cinemachine": "2.10.1",
     "com.unity.collab-proxy": "2.5.1",
     "com.unity.ide.rider": "3.0.28",
