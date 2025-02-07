@@ -3,12 +3,8 @@ using System.Collections.Generic;
 
 public class AutoAddComponents : MonoBehaviour
 {
-    // Define a dictionary to map GameObject names to the components to add  
-    private static readonly Dictionary<string, System.Type> componentMap = new Dictionary<string, System.Type>
-    {
-        { "Player", typeof(Rigidbody) }, // Example: Add Rigidbody to GameObjects named "Player",
-        { "btn primary", typeof(BoxCollider) }
-    };
+    // List to hold the name-component pairs  
+    public List<NameComponentPair> componentMappings;
 
     public void Awake()
     {
@@ -24,16 +20,42 @@ public class AutoAddComponents : MonoBehaviour
 
     private void AddComponentsBasedOnName(GameObject obj)
     {
-        // Check if the GameObject's name is in the map  
-        if (componentMap.TryGetValue(obj.name, out System.Type componentType))
+        // Iterate through the component mappings  
+        foreach (var mapping in componentMappings)
         {
-            // Check if the component already exists  
-            if (obj.GetComponent(componentType) == null)
+            // Check if the GameObject's name matches the mapping  
+            if (obj.name == mapping.gameObjectName)
             {
-                // Add the component  
-                obj.AddComponent(componentType);
-                Debug.Log($"Added {componentType.Name} to {obj.name}");
+                // Get the component type from the string  
+                System.Type componentType = GetTypeFromString(mapping.componentType);
+                if (componentType != null)
+                {
+                    // Check if the component already exists  
+                    if (obj.GetComponent(componentType) == null)
+                    {
+                        // Add the component  
+                        obj.AddComponent(componentType);
+                        Debug.Log($"Added {componentType.Name} to {obj.name}");
+                    }
+                }
             }
         }
+    }
+
+    private System.Type GetTypeFromString(string typeName)
+    {
+        // Attempt to find the type by name  
+        System.Type type = System.Type.GetType(typeName);
+        if (type == null)
+        {
+            // If the type is not found, look in the currently loaded assemblies  
+            foreach (var assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+            {
+                type = assembly.GetType(typeName);
+                if (type != null)
+                    break;
+            }
+        }
+        return type;
     }
 }
