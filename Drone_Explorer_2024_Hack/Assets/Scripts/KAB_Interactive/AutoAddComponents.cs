@@ -23,8 +23,22 @@ public class AutoAddComponents : MonoBehaviour
         // Iterate through the component mappings  
         foreach (var mapping in componentMappings)
         {
-            // Check if the GameObject's name matches the mapping  
-            if (obj.name == mapping.gameObjectName)
+            bool isMatch = false;
+
+            switch (mapping.matchType)
+            {
+                case MatchType.Contains:
+                    isMatch = obj.name.Contains(mapping.gameObjectName);
+                    break;
+                case MatchType.StartsWith:
+                    isMatch = obj.name.StartsWith(mapping.gameObjectName);
+                    break;
+                case MatchType.EndsWith:
+                    isMatch = obj.name.EndsWith(mapping.gameObjectName);
+                    break;
+            }
+
+            if (isMatch)
             {
                 // Get the component type from the string  
                 System.Type componentType = GetTypeFromString(mapping.componentType);
